@@ -16,7 +16,7 @@ public class DomestikaHomePage extends SeleniumBase {
     }
     final static String categoria ="Cursos online de Diseño Web y App";
 
-
+    By btnCourses = By.xpath("//a[@id='courses-nav-dropdown']");
     By courses = By.xpath("//ul[@class='nav nav--lateral'][1]");
     By categorias = By.xpath("//ul[@class='nav nav--lateral'][2]");
     By btnGiftCard = By.xpath("//button[@data-track-category='Landing Gift Card']");
@@ -25,10 +25,15 @@ public class DomestikaHomePage extends SeleniumBase {
     By campoBusqueda = By.xpath("//header/nav[@id='js-mainnav']/div[1]/div[2]/div[2]/div[1]/div[1]/form[1]/input[1]");
     By btnBuscar = By.xpath("//button[@class='ais-SearchBox-submit']");
 
-    public void search(String text){
-        setText(campoBusqueda,text);
+
+
+
+    public void search(){
         WebElement search = findElement(btnBuscar);
         search.click();
+    }
+    public void setTextSearch(String text){
+        setText(campoBusqueda,text);
     }
 
     public void selectCategory(String cat){
@@ -41,4 +46,25 @@ public class DomestikaHomePage extends SeleniumBase {
         }
     }
 
+    public void selectCourses() {
+        WebElement btn = findElement(btnCourses);
+        btn.click();
+    }
+
+    public void addGiftCard(){
+        WebElement btnGC = findElement(btnGiftCard);
+        Assert.assertEquals("Regala 1 curso",btnGC.getText());
+        btnGC.click();
+    }
+
+    public void selectCourse(String cat) {
+        List<WebElement> coursesList = findElements(courses);
+        for (WebElement c: coursesList) {
+            if (c.getText().equals(cat)){
+                c.click();
+                break;
+            }
+        }
+
+    }
 }

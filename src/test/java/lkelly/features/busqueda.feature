@@ -6,13 +6,13 @@ Feature: Busqueda de cursos en Domestika
   @test
   Scenario: Busqueda por categoria
     Given estoy en un navegador con la pagina inicial de Domestika
-    When selecciono la  seccion cursos
-    And selecciono la categoria "Diseño Web y App"
-    Then el navegador me muestra los resultados de busqueda
+    When selecciono la seccion cursos
+    And selecciono la categoria "Diseño Web y App" en la barra lateral
+    Then el navegador me muestra los resultados de busqueda por categoria
 
    @test
-   Scenario: Busqueda por categoria
+   Scenario: Busqueda por nombre
      Given estoy en un navegador con la pagina inicial de Domestika
      When ingreso el nombre del curso "Fundamentos del Community Management"
-     And realizo la busqueda presionando la lupita
-     Then el navegador me muestra los resultados de busqueda
+     And realizo la busqueda presionando buscar
+     Then el navegador me muestra los cursos que coincidan con la busqueda
