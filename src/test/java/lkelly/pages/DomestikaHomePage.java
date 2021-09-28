@@ -17,27 +17,32 @@ public class DomestikaHomePage extends SeleniumBase {
     final static String categoria ="Cursos online de Diseño Web y App";
 
     By btnCourses = By.xpath("//a[@id='courses-nav-dropdown']");
-    By courses = By.xpath("//ul[@class='nav nav--lateral'][1]");
-    By categorias = By.xpath("//ul[@class='nav nav--lateral'][2]");
+    By lateral = By.xpath("//*[@data-track-category='Cursos']");
     By btnGiftCard = By.xpath("//button[@data-track-category='Landing Gift Card']");
     By tituloGiftCrad = By.xpath("//h3[contains(text(),'Tarjeta regalo de Domestika')]");
     By tituloBusqueda = By.xpath("//h1[contains(text(),"+ categoria +")]");
-    By campoBusqueda = By.xpath("//header/nav[@id='js-mainnav']/div[1]/div[2]/div[2]/div[1]/div[1]/form[1]/input[1]");
-    By btnBuscar = By.xpath("//button[@class='ais-SearchBox-submit']");
-
-
-
+    By campoBusqueda = By.xpath("//*[@placeholder='Buscar cursos']");
+    By btnBuscar = By.xpath("//*[@class='ais-SearchBox-submit']");
+    By carrito = By.xpath("//*[@class='cart cart--full']");
+    By titleCart = By.xpath("//*[@class='h2 cart__title t-cart-title']");
+    By removeCart = By.xpath("//*[contains(@id,'remove-cart-item')][1]");
+    By removeMessage = By.xpath("//*[@class='flash-alert flash-alert--success js-flash-alert']");
+    By courseFromHome = By.xpath("//*[@class='a-text--small a-text--bold js-amplitude-track']");
+    By courseTitle = By.xpath("//*[@class='course-header-new__title']");
+    By addToCart = By.xpath("//button[contains(@id,'add-to-cart')][2]");
+    By btnBuy = By.xpath("//*[@class='a-button js-amplitude-track']");
 
     public void search(){
         WebElement search = findElement(btnBuscar);
         search.click();
+        waitElementVisible(tituloBusqueda);
     }
     public void setTextSearch(String text){
         setText(campoBusqueda,text);
     }
 
     public void selectCategory(String cat){
-        List<WebElement> categories = findElements(categorias);
+        List<WebElement> categories = findElements(lateral);
         for (WebElement category: categories) {
             if (category.getText().equals(cat)){
                 category.click();
@@ -57,14 +62,32 @@ public class DomestikaHomePage extends SeleniumBase {
         btnGC.click();
     }
 
-    public void selectCourse(String cat) {
-        List<WebElement> coursesList = findElements(courses);
-        for (WebElement c: coursesList) {
-            if (c.getText().equals(cat)){
-                c.click();
-                break;
-            }
-        }
-
+    public void goToCart(){
+        WebElement cart = findElement(carrito);
+        cart.click();
+        waitUrlContains("/cart");
+        Assert.assertTrue(findElement(titleCart).getText().contains("Carrito"));
     }
+
+    public String removeFromCart(String s){
+        WebElement remove = findElement(removeCart);
+        remove.click();
+        waitElementVisible(removeMessage);
+        return findElement(removeMessage).getText();
+    }
+
+    public void selectCourseFromHome(int i){
+        List<WebElement> courses= findElements(courseFromHome);
+        courses.get(i).click();
+        waitElementVisible(courseTitle);
+    }
+    public void setAddToCart(){
+        WebElement add = findElement(addToCart);
+        add.click();
+        waitUrlContains("/cart/interstitial/course/");
+        Assert.assertTrue(findElement(btnBuy).isEnabled());
+    }
+
+
+
 }

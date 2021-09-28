@@ -6,7 +6,7 @@ Feature: Realizar orden de compra en Domestika
   @test @compras
   Scenario: Agregar tarjeta de regalo al carrito de compra
     Given estoy en un navegador con la pagina inicial de Domestika
-    When selecciono la  seccion cursos
+    When selecciono la seccion cursos
     And selecciono una Gift Card
     And presiono el boton Regala un curso
     Then se agrega al carrito de compras
@@ -15,13 +15,12 @@ Feature: Realizar orden de compra en Domestika
   Scenario: Eliminar elemento del carrito de compra
     Given estoy en un navegador con la pagina inicial de Domestika
     When selecciono el carrito de compras
-    And presiono el boton eliminar para el curso
-    Then se quita el curso del carrito de compra
+    And presiono el boton eliminar quitar del carrito "Tarjeta regalo de Domestika"
+    Then se quita el curso del carrito de compra "Tarjeta regalo de Domestika"
 
   @test @compras
   Scenario: Agregar curso al carrito
-    Given estoy en un navegador con la pagina de Domestika en la seccion cursos
-    When selecciono el curso "Dibujo para principiantes nivel-1"
-    And se carga la pagina del curso ""
+    Given estoy en un navegador con la pagina inicial de Domestika
+    When selecciono el curso en la posicion 1 de la opciones sugeridas
     And presiono el boton agregar al carrito
-    Then se agrega al carrito de compra
+    Then se agrega al carrito de compras

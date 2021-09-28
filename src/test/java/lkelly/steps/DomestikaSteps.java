@@ -8,6 +8,8 @@ import org.junit.Assert;
 public class DomestikaSteps {
     DomestikaHomePage home;
     String url = "https://www.domestika.org/es";
+    String message = "";
+    String nombreCurso;
 
     @Given("estoy en un navegador con la pagina inicial de Domestika")
     public void estoy_en_un_navegador_con_la_pagina_inicial_de_domestika() {
@@ -18,6 +20,8 @@ public class DomestikaSteps {
     @When("selecciono la seccion cursos")
     public void selecciono_la_seccion_cursos() {
         home.selectCourses();
+        home.waitUrlContains("/courses");
+        Assert.assertTrue(home.getUrl().contains("/courses"));
     }
     @When("selecciono la categoria {string} en la barra lateral")
     public void selecciono_la_categoria_en_la_barra_lateral(String string) {
@@ -44,36 +48,47 @@ public class DomestikaSteps {
     }
     @When("selecciono una Gift Card")
     public void selecciono_una_gift_card() {
-        home.selectCourse("Tarjetas de regalo");
+        home.selectCategory("Tarjetas de regalo");
+        home.waitUrlContains("/courses/gift-card");
+        Assert.assertTrue(home.getUrl().contains("/courses/gift-card"));
     }
     @When("presiono el boton Regala un curso")
     public void presiono_el_boton_regala_un_curso() {
         home.addGiftCard();
+        home.waitUrlContains("/cart/interstitial/gift_card/");
+        Assert.assertTrue(home.getUrl().contains("/cart/interstitial/gift_card/"));
     }
+
     @When("selecciono el carrito de compras")
     public void selecciono_el_carrito_de_compras() {
+        home.goToCart();
+    }
+    @When("selecciono el curso en la posicion 1")
+    public void selecciono_el_curso() {
 
     }
-    @When("selecciono el curso {string}")
-    public void selecciono_el_curso(String string) {
 
-    }
-    @When("se carga la pagina del curso {string}")
-    public void se_carga_la_pagina_del_curso(String string) {
-
-    }
     @When("presiono el boton agregar al carrito")
     public void presiono_el_boton_agregar_al_carrito() {
 
     }
+    @When("presiono el boton eliminar quitar del carrito {string}")
+    public void presiono_el_boton_eliminar_quitar_del_carrito(String string) {
+       message =  home.removeFromCart(string);
+    }
+
+    @Then("se quita el curso del carrito de compra {string}")
+    public void se_quita_el_curso_del_carrito_de_compra(String string) {
+      Assert.assertEquals("Se ha eliminado \" " + string +"\" del carrito",message);
+    }
 
     @Then("se agrega al carrito de compras")
-    public void se_agrega_al_carrito_de_compras() {
-
-    }
-    @Then("se quita el curso del carrito de compra")
-    public void se_quita_el_curso_del_carrito_de_compra() {
+    public void seAgregaAlCarritoDeCompras() {
 
     }
 
+    @When("selecciono el curso en la posicion {int} de la opciones sugeridas")
+    public void seleccionoElCursoEnLaPosicionDeLaOpcionesSugeridas(int arg0) {
+        home.selectCourseFromHome(arg0);
+    }
 }

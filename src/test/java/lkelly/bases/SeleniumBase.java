@@ -78,4 +78,8 @@ public class SeleniumBase {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
 
     }
+    public void waitElementVisible(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+    }
 }

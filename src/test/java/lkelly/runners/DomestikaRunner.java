@@ -7,6 +7,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = {"src/test/java/lkelly/features"},
         glue = {"lkelly.steps","lkelly.bases"},
         plugin ={"pretty"},
-        tags = "@compras")
+        tags = "@test")
 public class DomestikaRunner {
 }

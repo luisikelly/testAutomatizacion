@@ -24,7 +24,7 @@ public class AppHook {
     @Before(order = 1)
     public void setupBrowser() {
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver,10);
+        wait = new WebDriverWait(driver,15);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
