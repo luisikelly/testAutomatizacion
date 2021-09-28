@@ -23,7 +23,7 @@ public class DomestikaHomePage extends SeleniumBase {
     By tituloBusqueda = By.xpath("//h1[contains(text(),"+ categoria +")]");
     By campoBusqueda = By.xpath("//*[@placeholder='Buscar cursos']");
     By btnBuscar = By.xpath("//*[@class='ais-SearchBox-submit']");
-    By carrito = By.xpath("//*[@class='cart cart--full']");
+    By carrito = By.xpath("//a[@data-track-label='/cart']");
     By titleCart = By.xpath("//*[@class='h2 cart__title t-cart-title']");
     By removeCart = By.xpath("//*[contains(@id,'remove-cart-item')][1]");
     By removeMessage = By.xpath("//*[@class='flash-alert flash-alert--success js-flash-alert']");
