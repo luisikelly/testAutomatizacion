@@ -38,8 +38,9 @@ public class DomestikaHomePage extends SeleniumBase {
         search.click();
         waitElementVisible(tituloBusqueda);
     }
-    public void setTextSearch(String text){
+    public String setTextSearch(String text){
         setText(campoBusqueda,text);
+        return getAttributeValue(campoBusqueda);
     }
 
     public void selectCategory(String cat){

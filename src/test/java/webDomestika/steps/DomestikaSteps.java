@@ -16,6 +16,7 @@ public class DomestikaSteps {
     public void estoy_en_un_navegador_con_la_pagina_inicial_de_domestika() {
         home = new DomestikaHomePage(AppHook.getDriver(),AppHook.getWait());
         home.goToUrl(url);
+        Assert.assertEquals(url, home.getUrl());
     }
 
     @Given("Tengo algun curso en el carrito de compras")
@@ -43,12 +44,9 @@ public class DomestikaSteps {
 
     @When("ingreso el nombre del curso {string}")
     public void ingreso_el_nombre_del_curso(String string) {
-       home.setTextSearch(string);
+       Assert.assertEquals("Fundamentos del Community Management",home.setTextSearch(string));
     }
-    @When("realizo la busqueda presionando buscar")
-    public void realizo_la_busqueda_presionando_buscar() {
-        home.search();
-    }
+
 
     @When("selecciono una Gift Card")
     public void selecciono_una_gift_card() {
