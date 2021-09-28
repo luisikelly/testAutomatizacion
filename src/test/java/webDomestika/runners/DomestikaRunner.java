@@ -4,9 +4,9 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/java/lkelly/features"},
-        glue = {"lkelly.steps","lkelly.bases"},
+@CucumberOptions(features = {"src/test/java/webDomestika/features"},
+        glue = {"webDomestika.steps","webDomestika.bases"},
         plugin ={"pretty"},
-        tags = "@addToCart")
+        tags = "@test")
 public class DomestikaRunner {
 }
