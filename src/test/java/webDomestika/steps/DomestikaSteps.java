@@ -44,7 +44,7 @@ public class DomestikaSteps {
 
     @When("ingreso el nombre del curso {string}")
     public void ingreso_el_nombre_del_curso(String string) {
-       Assert.assertEquals("Fundamentos del Community Management",home.setTextSearch(string));
+       Assert.assertEquals(string,home.setTextSearch(string));
     }
 
 
