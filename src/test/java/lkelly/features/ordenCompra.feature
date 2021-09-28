@@ -16,8 +16,8 @@ Feature: Realizar orden de compra en Domestika
     Given estoy en un navegador con la pagina inicial de Domestika
     And Tengo algun curso en el carrito de compras
     When selecciono el carrito de compras
-    And presiono el boton eliminar quitar del carrito "Tarjeta regalo de Domestika"
-    Then se quita el curso del carrito de compra "Tarjeta regalo de Domestika"
+    And presiono el boton eliminar quitar del carrito
+    Then se quita el curso del carrito de compra
 
   @test @compras
   Scenario: Agregar curso al carrito

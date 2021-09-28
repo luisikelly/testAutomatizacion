@@ -20,9 +20,7 @@ public class DomestikaSteps {
 
     @Given("Tengo algun curso en el carrito de compras")
     public void tengo_algun_curso_en_el_carrito_de_compras() {
-        this.seleccionoElCursoEnLaPosicionDeLaOpcionesSugeridas(2);
-        this.presiono_el_boton_agregar_al_carrito();
-        this.estoy_en_un_navegador_con_la_pagina_inicial_de_domestika();
+        home.addToCartFromHomeAndGoToHome(0);
     }
 
 
@@ -75,9 +73,9 @@ public class DomestikaSteps {
     public void presiono_el_boton_agregar_al_carrito() {
 
     }
-    @When("presiono el boton eliminar quitar del carrito {string}")
-    public void presiono_el_boton_eliminar_quitar_del_carrito(String string) {
-       message =  home.removeFromCart(string);
+    @When("presiono el boton eliminar quitar del carrito")
+    public void presiono_el_boton_eliminar_quitar_del_carrito() {
+       message =  home.removeFromCart();
     }
 
     @When("selecciono el curso en la posicion {int} de la opciones sugeridas")
@@ -93,9 +91,9 @@ public class DomestikaSteps {
         Assert.assertTrue(home.getUrl().contains("?query="));
     }
 
-    @Then("se quita el curso del carrito de compra {string}")
-    public void se_quita_el_curso_del_carrito_de_compra(String string) {
-      Assert.assertEquals("Se ha eliminado \" " + string +"\" del carrito",message);
+    @Then("se quita el curso del carrito de compra")
+    public void se_quita_el_curso_del_carrito_de_compra() {
+        Assert.assertTrue(message.contains("Se ha eliminado"));
     }
 
     @Then("se agrega al carrito de compras")

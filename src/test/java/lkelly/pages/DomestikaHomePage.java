@@ -31,6 +31,8 @@ public class DomestikaHomePage extends SeleniumBase {
     By courseTitle = By.xpath("//*[@class='course-header-new__title']");
     By addToCart = By.xpath("//button[contains(@id,'add-to-cart')][2]");
     By btnBuy = By.xpath("//*[@class='a-button js-amplitude-track']");
+    By btnAddCartHome = By.xpath("//button[contains(@id,'add-to-cart')]");
+    By domestikaLogo = By.xpath("//a[contains(text(),'DOMESTIKA')]");
 
     public void search(){
         WebElement search = findElement(btnBuscar);
@@ -69,7 +71,7 @@ public class DomestikaHomePage extends SeleniumBase {
         Assert.assertTrue(findElement(titleCart).getText().contains("Carrito"));
     }
 
-    public String removeFromCart(String s){
+    public String removeFromCart(){
         WebElement remove = findElement(removeCart);
         remove.click();
         waitElementVisible(removeMessage);
@@ -78,6 +80,7 @@ public class DomestikaHomePage extends SeleniumBase {
 
     public void selectCourseFromHome(int i){
         List<WebElement> courses= findElements(courseFromHome);
+        i--;
         courses.get(i).click();
         waitElementVisible(courseTitle);
     }
@@ -88,6 +91,10 @@ public class DomestikaHomePage extends SeleniumBase {
         Assert.assertTrue(findElement(btnBuy).isEnabled());
     }
 
-
-
+    public void addToCartFromHomeAndGoToHome(int i){
+        List<WebElement> buttons = findElements(btnAddCartHome);
+        buttons.get(i).click();
+        waitUrlContains("/cart");
+        findElement(domestikaLogo).click();
+    }
 }
