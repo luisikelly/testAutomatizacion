@@ -1,6 +1,6 @@
-package lkelly.pages;
+package webDomestika.pages;
 
-import lkelly.bases.SeleniumBase;
+import webDomestika.bases.SeleniumBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

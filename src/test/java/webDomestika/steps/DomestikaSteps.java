@@ -1,8 +1,8 @@
-package lkelly.steps;
+package webDomestika.steps;
 
 import io.cucumber.java.en.*;
-import lkelly.bases.AppHook;
-import lkelly.pages.DomestikaHomePage;
+import webDomestika.bases.AppHook;
+import webDomestika.pages.DomestikaHomePage;
 import org.junit.Assert;
 
 public class DomestikaSteps {

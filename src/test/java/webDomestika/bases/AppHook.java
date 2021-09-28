@@ -1,4 +1,4 @@
-package lkelly.bases;
+package webDomestika.bases;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

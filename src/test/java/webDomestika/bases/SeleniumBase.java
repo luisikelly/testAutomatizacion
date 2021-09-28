@@ -1,4 +1,4 @@
-package lkelly.bases;
+package webDomestika.bases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
