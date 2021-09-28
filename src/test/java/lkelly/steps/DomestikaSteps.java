@@ -71,7 +71,7 @@ public class DomestikaSteps {
 
     @When("presiono el boton agregar al carrito")
     public void presiono_el_boton_agregar_al_carrito() {
-
+        home.setAddToCart();
     }
     @When("presiono el boton eliminar quitar del carrito")
     public void presiono_el_boton_eliminar_quitar_del_carrito() {

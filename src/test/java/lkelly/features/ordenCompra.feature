@@ -19,7 +19,7 @@ Feature: Realizar orden de compra en Domestika
     And presiono el boton eliminar quitar del carrito
     Then se quita el curso del carrito de compra
 
-  @test @compras
+  @test @compras @addToCart
   Scenario: Agregar curso al carrito
     Given estoy en un navegador con la pagina inicial de Domestika
     When selecciono el curso en la posicion 1 de la opciones sugeridas
