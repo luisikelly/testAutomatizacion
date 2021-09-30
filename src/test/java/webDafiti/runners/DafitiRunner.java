@@ -7,6 +7,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = {"src/test/java/webDafiti/features"},
         glue = {"webDafiti.steps","webDafiti.bases"},
         plugin ={"pretty"},
-        tags = "@removeCart")
+        tags = "@test")
 public class DafitiRunner {
 }

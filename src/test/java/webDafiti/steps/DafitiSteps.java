@@ -36,12 +36,6 @@ public class DafitiSteps {
         homePage.goToUrl(urlDafiti);
         elijo_comprar_en("Argentina");
     }
-    @Given("tengo un producto en el carrito de compras")
-    public void tengo_un_producto_en_el_carrito_de_compras() {
-        selecciono_la_categoria("Mujer");
-        selecciono_la_seccion("Accesorios");
-        homePageArg.addCart(0);
-    }
 
 
     // -------------- WHEN --------------
@@ -77,35 +71,25 @@ public class DafitiSteps {
         homePageArg.selectSection(string);
     }
 
-    @When("selecciono el boton carrito de compras")
-    public void selecciono_el_boton_carrito_de_compras() {
-        homePageArg.goToCart();
+
+    @When("selecciono el producto {string}")
+    public void selecciono_el_producto(String string) {
+        homePageArg.selectProduct(string);
     }
 
-    @When("presiono  el boton eliminar del carrito")
-    public void presiono_el_boton_eliminar_del_carrito() {
-        homePageArg.removeCart(0)
-        ;
+    @When("presiono agregar al carrito")
+    public void presiono_agregar_al_carrito() {
+        homePageArg.addCart();
     }
 
-    @When("seleccion el producto {string}")
-    public void seleccion_el_producto(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @When("selecciono flitrar por  talle {string}")
+    public void selecciono_flitrar_por_talle(String string) {
+        homePageArg.filterBySize(string);
     }
-
-    @When("selecciono talle {string}")
-    public void selecciono_talle(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @When("presiono boton aplicar")
+    public void presiono_boton_aplicar() {
+        homePageArg.applyFilterSize();
     }
-
-    @When("presiono boton comprar")
-    public void presiono_boton_comprar() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
 
 
     // -------------- THEN --------------
@@ -141,14 +125,14 @@ public class DafitiSteps {
         Assert.assertTrue(homePageArg.getUrl().contains(string));
         Assert.assertTrue(homePageArg.getUrl().contains(string2));
     }
-    @Then("se agrega al carrito de compras el producto {string}")
-    public void se_agrega_al_carrito_de_compras_el_producto(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("se agrega al carrito de compras el producto")
+    public void se_agrega_al_carrito_de_compras_el_producto() {
+       homePageArg.cartBoxDisplayed();
     }
-    @Then("el carrito de compras esta vacio")
-    public void el_carrito_de_compras_esta_vacio() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Then("el navegador me muestra los resultados de busqueda filtrados por talle {string}")
+    public void el_navegador_me_muestra_los_resultados_de_busqueda_filtrados_por_talle(String string) {
+        System.out.println(homePageArg.getUrl());
+        //Assert.assertTrue(homePageArg.getUrl().contains("size="+string));
     }
 }

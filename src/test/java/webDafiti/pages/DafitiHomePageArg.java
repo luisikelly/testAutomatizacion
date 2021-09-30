@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webDafiti.bases.SeleniumBase;
 
@@ -22,14 +23,14 @@ public class DafitiHomePageArg extends SeleniumBase {
     By btnSearch = By.xpath("//*[contains(@class,'searchButton')]");
     By categories = By.xpath("//a[contains(@class,'segment')]");
     By sections = By.xpath("//a[contains(@class,'sectionName')]");
-    By titleCatalog = By.xpath("//div[contains(@class,'titleCatalog')]");
     By cart = By.id("cart-head");
     By items = By.xpath("//div[@class='itm-product-main-info']");
     By btnAdd = By.xpath("//button[contains(@class,'itm-addToCart')]");
-    By removeCart = By.xpath("//a[contains(@class,'removeProductCart')]");
-
-
-
+    By itemTitle = By.xpath("//*[@class='itm-title']");
+    By cartBox = By.xpath("//*[contains(@class,'cartBox')]");
+    By titleCatalog = By.xpath("//div[contains(@class,'titleCatalog')]");
+    By checkboxes = By.xpath("//a[contains(@data-label,'size')]");
+    By btnApplyFilter = By.xpath("//*[contains(@class,'applyFilterButton')]");
 
     //Keyword Driven
 
@@ -75,15 +76,29 @@ public class DafitiHomePageArg extends SeleniumBase {
                 break;
             }
         }
+        waitElementVisible(titleCatalog);
     }
 
-
-    public void addCart(int pos) {
+    public void selectProduct(String prod){
         List<WebElement> itemsList = findElements(items);
-        WebElement item = itemsList.get(pos);
-        WebElement add = findElement(btnAdd);
+        WebElement item = null;
+        for (WebElement product:itemsList) {
+            if(product.findElement(itemTitle).getText().equals(prod)){
+                item = product;
+                break;
+            }
+        }
         moveToElement(item);
+    }
+
+    public void addCart() {
+        WebElement add = findElement(btnAdd);
         add.click();
+        waitElementVisible(cartBox);
+    }
+    public void cartBoxDisplayed(){
+        WebElement cart = findElement(cartBox);
+        Assert.assertTrue(cart.isDisplayed());
     }
 
     public void goToCart() {
@@ -92,9 +107,21 @@ public class DafitiHomePageArg extends SeleniumBase {
         waitUrlContains("cart");
     }
 
-    public void removeCart(int pos){
-        List<WebElement> removeButtons = findElements(removeCart);
-        WebElement remove = removeButtons.get(pos);
-        remove.click();
+    public void filterBySize(String size){
+        List<WebElement> checkbox = findElements(checkboxes);
+        for (WebElement option:checkbox) {
+            if(option.getAttribute("data-value").equals(size)){
+                option.click();
+                break;
+            }
+        }
+
+    }
+
+    public void applyFilterSize() {
+        List<WebElement> btnsApply = findElements(btnApplyFilter);
+        WebElement btnApply = btnsApply.get(0);
+        btnApply.click();
+        waitUrlContains("size=");
     }
 }
