@@ -8,5 +8,5 @@
 #### Para el caso de Domestika:
 - en Terminal: utilizar comando mvn -Dtest=DomestikaRunner test
 
-#### Para el caso de Dafiti;
+#### Para el caso de Dafiti:
 -en Terminal: utilizar comando mvn -Dtest=DafitiRunner test
