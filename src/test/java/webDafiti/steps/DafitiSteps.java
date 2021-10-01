@@ -5,6 +5,7 @@ import org.junit.Assert;
 import webDafiti.bases.AppHook;
 import webDafiti.pages.DafitiHomePage;
 import webDafiti.pages.DafitiHomePageArg;
+import webDafiti.pages.DafitiLoginPage;
 
 /***
  * @author Luisina.Kelly
@@ -19,7 +20,7 @@ public class DafitiSteps {
     final static String colombia = ".co";
     DafitiHomePage homePage = new DafitiHomePage(AppHook.getDriver(), AppHook.getWait());
     DafitiHomePageArg homePageArg = new DafitiHomePageArg(AppHook.getDriver(), AppHook.getWait());
-
+    DafitiLoginPage loginPage = new DafitiLoginPage(AppHook.getDriver(),AppHook.getWait());
 
     // -------------- GIVEN --------------
 
@@ -90,6 +91,30 @@ public class DafitiSteps {
     public void presiono_boton_aplicar() {
         homePageArg.applyFilterSize();
     }
+    @When("ingreso en el campo mail {string}")
+    public void ingreso_en_el_campo_mail(String string) {
+        homePageArg.setTextNewletter(string);
+    }
+
+    @When("presiono boton {string}")
+    public void presiono_boton(String string) {
+        homePageArg.clickBtnNewsletter(string);
+    }
+    @When("presiono boton ingresar")
+    public void presiono_boton_ingresar() {
+       homePageArg.goToLogin();
+       Assert.assertTrue(homePageArg.getUrl().contains("login"));
+    }
+
+    @When("ingreso {string} en el campo email")
+    public void ingreso_en_el_campo_email(String string) {
+        loginPage.setText(string,"email");
+    }
+
+    @When("presiono boton ingresar en la pagina de login")
+    public void presiono_boton_ingresar_en_la_pagina_de_login() {
+        loginPage.clickIngresar();
+    }
 
 
     // -------------- THEN --------------
@@ -133,6 +158,16 @@ public class DafitiSteps {
     @Then("el navegador me muestra los resultados de busqueda filtrados por talle {string}")
     public void el_navegador_me_muestra_los_resultados_de_busqueda_filtrados_por_talle(String string) {
         System.out.println(homePageArg.getUrl());
-        //Assert.assertTrue(homePageArg.getUrl().contains("size="+string));
+        Assert.assertTrue(homePageArg.getUrl().contains("size="+string));
     }
+    @Then("el navegador me muestra mensaje de error {string}")
+    public void el_navegador_me_muestra_mensaje_de_error(String string) {
+        homePageArg.getMessageNewsletter(string);
+    }
+
+    @Then("el navegador me muestra mensaje de error {string} sobre el campo {string}")
+    public void el_navegador_me_muestra_mensaje_de_error_sobre_el_campo(String string, String string2) {
+        loginPage.validateMessageError(string,string2);
+    }
+
 }

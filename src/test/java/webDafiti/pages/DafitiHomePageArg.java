@@ -25,13 +25,16 @@ public class DafitiHomePageArg extends SeleniumBase {
     By sections = By.xpath("//a[contains(@class,'sectionName')]");
     By cart = By.id("cart-head");
     By items = By.xpath("//div[@class='itm-product-main-info']");
-    By btnAdd = By.xpath("//button[contains(@class,'itm-addToCart')]");
+    By btnAdd = By.xpath("//button[contains(@class,'btn-add-cart')]");
     By itemTitle = By.xpath("//*[@class='itm-title']");
     By cartBox = By.xpath("//*[contains(@class,'cartBox')]");
-    By titleCatalog = By.xpath("//div[contains(@class,'titleCatalog')]");
+    By titleCatalog = By.xpath("//*[contains(@class,'titleCatalog mts mbl')]");
     By checkboxes = By.xpath("//a[contains(@data-label,'size')]");
     By btnApplyFilter = By.xpath("//*[contains(@class,'applyFilterButton')]");
-
+    By newsLetterBox = By.id("newsletter-email");
+    By buttonsNewsletter = By.name("subscription");
+    By messageNewsletterBox = By.xpath("//*[contains(@class,'sel-message-error')]");
+    By login = By.id("LoginInfoTag");
     //Keyword Driven
 
     /***
@@ -89,6 +92,7 @@ public class DafitiHomePageArg extends SeleniumBase {
             }
         }
         moveToElement(item);
+       // waitElementClickable(btnAdd);
     }
 
     public void addCart() {
@@ -123,5 +127,43 @@ public class DafitiHomePageArg extends SeleniumBase {
         WebElement btnApply = btnsApply.get(0);
         btnApply.click();
         waitUrlContains("size=");
+    }
+
+    public void setTextNewletter(String email) {
+        WebElement emailBox = findElement(newsLetterBox);
+        emailBox.sendKeys(email);
+    }
+
+    public void clickBtnNewsletter(String type) {
+        List<WebElement> buttons = findElements(buttonsNewsletter);
+        switch (type){
+            case "Soy Mujer":
+                for (WebElement b: buttons) {
+                    if(b.getAttribute("value").equals("female")){
+                        b.click();
+                        break;
+                    }
+                }
+                break;
+            case "Soy Hombre":
+                for (WebElement b: buttons) {
+                    if(b.getAttribute("value").equals("male")){
+                        b.click();
+                        break;
+                    }
+                }
+                break;
+        }
+    }
+
+    public void getMessageNewsletter(String m) {
+        WebElement message = findElement(messageNewsletterBox);
+        Assert.assertEquals(m,message.getText());
+    }
+
+    public void goToLogin() {
+        WebElement loginBtn = findElement(login);
+        loginBtn.click();
+        waitUrlContains("login");
     }
 }

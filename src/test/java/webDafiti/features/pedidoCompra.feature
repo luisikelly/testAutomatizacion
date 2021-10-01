@@ -4,7 +4,7 @@ Feature: Realizar pedido
   Para realizar una compra.
 
 
-  @test @compras @addToCart
+  #@test @compras @addToCart
   Scenario: Agregar producto al carrito desde resultados
     Given estoy en un navegador con la pagina inicial de Dafiti Argentina
     When selecciono la categoria "Mujer"
