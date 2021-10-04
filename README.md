@@ -1,7 +1,7 @@
 # Test Automatización
 
 ### Descripción:
- Práctica Evaluacion TSOFT - Casos de prueba con Selenium utilizando como ejemplo la web de Domestika y otro caso para la web de Dafiti.
+ Práctica Evaluacion TSOFT - Casos de prueba con Selenium utilizando como ejemplo la web de Domestika, Dafiti y WAGGGS.
 
 ### Instrucciones de ejecución:
 
