@@ -24,9 +24,11 @@ public class WAGGGSHomePage extends SeleniumBase {
     By searchBox = By.name("q");
     By btnIr = By.xpath("//button[contains(@class,'btn-primary rebrand-submit')]");
     By principalBarButtons = By.className("navigation-primary");
+    By secondaryBarButtons = By.className("navigation-secondary");
     By actualLanguage = By.xpath("//*[@class='header-tools header-tools--lang']");
     By language = By.xpath("//*[@class='header-tools-list-item']");
     By languageList = By.xpath("//*[@class='header-tools-list']");
+    By btnNews = By.xpath("//a[contains(text(),'Noticias')]");
 
     public void clickSearchIcon() {
         click(searchIcon);
@@ -52,6 +54,7 @@ public class WAGGGSHomePage extends SeleniumBase {
         }
     }
 
+
     public void selectLanguage(String string) {
         List<WebElement> languages = findElement(language).findElements(By.tagName("a"));
         for (WebElement l:languages) {
@@ -65,6 +68,11 @@ public class WAGGGSHomePage extends SeleniumBase {
         WebElement language = findElement(actualLanguage);
         moveToElement(language);
         waitElementVisible(languageList);
+    }
+
+    public void goToNews() {
+        click(btnNews);
+        waitUrlContains("news");
     }
 }
 

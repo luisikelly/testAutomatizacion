@@ -3,19 +3,25 @@ package webWAGGGS.steps;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import webWAGGGS.bases.AppHook;
+import webWAGGGS.pages.WAGGGSGuiasArgentinasPage;
 import webWAGGGS.pages.WAGGGSHomePage;
+import webWAGGGS.pages.WAGGGSNewsPage;
 import webWAGGGS.pages.WAGGGSResourcesPage;
 
 public class WAGGGSSteps {
 
-    WAGGGSHomePage homePage = new WAGGGSHomePage(AppHook.getDriver(),AppHook.getWait());
-    WAGGGSResourcesPage resourcesPage = new WAGGGSResourcesPage(AppHook.getDriver(),AppHook.getWait());
+    WAGGGSHomePage homePage;
+    WAGGGSResourcesPage resourcesPage;
+    WAGGGSNewsPage newsPage;
+    WAGGGSGuiasArgentinasPage agaPage;
+
     String url = "https://www.wagggs.org/es/";
     String urlAGA = "https://www.wagggs.org/es/our-world/asociacion-guias-argentinas/";
 
 
     @Given("estoy en un navegador con la pagina inicial de WAGGGS")
     public void estoy_en_un_navegador_con_la_pagina_inicial_de_wagggs() {
+        homePage= new WAGGGSHomePage(AppHook.getDriver(),AppHook.getWait());
         homePage.goToUrl(url);
         Assert.assertTrue(homePage.getUrl().contains("www.wagggs.org"));
     }
@@ -38,6 +44,8 @@ public class WAGGGSSteps {
     @When("presiono recursos")
     public void presiono_recursos() {
         homePage.goToPage("RECURSOS");
+        resourcesPage = new WAGGGSResourcesPage(AppHook.getDriver(),AppHook.getWait());
+        Assert.assertTrue(resourcesPage.getUrl().contains("resources"));
     }
 
     @When("presiono boton busqueda")
@@ -75,5 +83,59 @@ public class WAGGGSSteps {
     public void el_navegador_me_muestra_la_pagina_en_ingles() {
         Assert.assertTrue(homePage.getUrl().contains("/en"));
     }
+
+    @When("presiono noticias")
+    public void presiono_noticias() {
+        homePage.goToNews();
+        newsPage = new WAGGGSNewsPage(AppHook.getDriver(),AppHook.getWait());
+        Assert.assertTrue(newsPage.getUrl().contains("news"));
+    }
+
+    @When("selecciono filtrar noticias por region {string}")
+    public void selecciono_filtrar_noticias_por_region(String string) {
+        newsPage.selectRegionFilter(string);
+    }
+
+    @Then("el navegador me muestra los resultados de busqueda filtrados por region {string}")
+    public void el_navegador_me_muestra_los_resultados_de_busqueda_filtrados_por_region(String string) {
+        String region =  "region=";
+        switch (string){
+            case "Global": region = region + "global";
+                break;
+            case "África": region = region + "africa";
+                break;
+            case "Árabe": region = region + "arab";
+                break;
+            case "Asia-Pacífico": region = region + "asia_pacific";
+                break;
+            case "Europa": region = region + "europe";
+                break;
+            case "Hemisferio Occidental": region = region + "western_hemisphere";
+                break;
+            }
+        Assert.assertTrue(newsPage.getUrl().contains(region));
+    }
+
+    @Given("estoy en un navegador con la seccion de la AGA en WAGGGGS")
+    public void estoy_en_un_navegador_con_la_seccion_de_la_aga_en_waggggs() {
+        agaPage = new WAGGGSGuiasArgentinasPage(AppHook.getDriver(),AppHook.getWait());
+        agaPage.goToUrl(urlAGA);
+    }
+
+    @When("presiono boton comunidades guias")
+    public void presiono_boton_comunidades_guias() {
+        agaPage.goToCommunities();
+    }
+
+    @When("selecciono provincia {string}")
+    public void selecciono_provincia(String string) {
+        agaPage.selectProvince(string);
+    }
+
+    @Then("el navegador me muestra el mapa de comunidades guias")
+    public void el_navegador_me_muestra_el_mapa_de_comunidades_guias() {
+        Assert.assertTrue(agaPage.getUrl().contains("www.google.com/maps"));
+    }
+
 
 }
