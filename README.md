@@ -10,3 +10,7 @@
 
 #### Para el caso de Dafiti:
 - en Terminal: utilizar comando mvn -Dtest=DafitiRunner test
+
+#### Para el caso de WAGGGS:
+- en Terminal: utilizar comando mvn -Dtest=WAGGGSRunner test
+
