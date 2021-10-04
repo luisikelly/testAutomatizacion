@@ -1,4 +1,4 @@
-package webDomestika.bases;
+package webWAGGGS.bases;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

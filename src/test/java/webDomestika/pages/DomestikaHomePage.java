@@ -32,6 +32,16 @@ public class DomestikaHomePage extends SeleniumBase {
     By addToCart = By.xpath("//button[contains(@id,'add-to-cart')]");
     By btnBuy = By.xpath("//*[@class='a-button js-amplitude-track']");
     By domestikaLogo = By.xpath("//a[contains(text(),'DOMESTIKA')]");
+    By emailBox = By.id("user_email");
+    By passwordBox = By.id("user_password");
+    By btnLogin = By.xpath("//*[@class='a-button ']");
+    By btnGoToLogin = By.xpath("//a[@class='login']");
+    By credentialBox = By.xpath("//*[@class='credentials-box']");
+    By alertErrorCredential = By.xpath("//div[contains(@class,'alert')]");
+    By languageButton = By.id("languageSelectionDropdownBtn");
+    By dropdownMenuLanguage = By.xpath("//div[contains(@class,'dropdown-menu show')]");
+    By btnClosePopUp = By.xpath("//button[@class='close']");
+
 
     public void search(){
         WebElement search = findElement(btnBuscar);
@@ -98,4 +108,70 @@ public class DomestikaHomePage extends SeleniumBase {
         waitUrlContains("/cart");
         findElement(domestikaLogo).click();
     }
+    public void clickLogin() {
+        WebElement login = findElement(btnGoToLogin);
+        login.click();
+        waitElementVisible(credentialBox);
+    }
+
+    public void setTextLogin(String string, String type) {
+        switch (type){
+            case "email": setText(emailBox,string);
+                break;
+            case "password": setText(passwordBox,string);
+                break;
+        }
+    }
+
+    public void login() {
+        WebElement login = findElement(btnLogin);
+        login.click();
+    }
+
+
+    public void loginErrorCredentials() {
+        WebElement message = findElement(alertErrorCredential).findElement(By.tagName("b"));
+        Assert.assertEquals("El email o la contraseña no son correctos.",message.getText());
+    }
+
+    public void clickLanguage() {
+        WebElement language = findElement(languageButton);
+        language.click();
+        waitForElementAndClick(btnClosePopUp);
+        language.click();
+        waitElementVisible(dropdownMenuLanguage);
+    }
+
+    public void changeLanguage(String newLanguage) {
+        List<WebElement> dropdownLanguage = findElement(dropdownMenuLanguage).findElements(By.tagName("a"));
+        for (WebElement l:dropdownLanguage) {
+            if(l.getText().equals(newLanguage)){
+                l.click();
+            }
+        }
+        waitUrlContains(getUrlLanguage(newLanguage));
+
+    }
+
+
+    public String getUrlLanguage(String newLanguage){
+        String language ="";
+        switch (newLanguage){
+            case "Español": language = "es";
+                break;
+            case "English": language = "en";
+                break;
+            case "Português": language = "pt";
+                break;
+            case "Deutsch": language = "de";
+                break;
+            case "Français": language = "fr";
+                break;
+            case "Italiano": language = "it";
+                break;
+
+        }
+        return language;
+    }
+
 }
