@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -82,4 +83,17 @@ public class SeleniumBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
     }
+    public void moveToElement(WebElement we){
+        Actions action = new Actions(driver);
+        action.moveToElement(we).build().perform();
+    }
+    public void clickAndHold(WebElement we){
+        Actions action = new Actions(driver);
+        action.clickAndHold(we).build().perform();
+    }
+
+    public void setKeys(Keys key, By locator){
+        driver.findElement(locator).sendKeys(key);
+    }
+
 }

@@ -1,12 +1,17 @@
 package webDomestika.steps;
 
 import io.cucumber.java.en.*;
+import org.openqa.selenium.Keys;
 import webDomestika.bases.AppHook;
 import webDomestika.pages.DomestikaHomePage;
 import org.junit.Assert;
+import webDomestika.pages.DomestikaProjectPage;
+import webDomestika.pages.DomestikaSupportPage;
 
 public class DomestikaSteps {
     DomestikaHomePage homePage;
+    DomestikaSupportPage supportPage;
+    DomestikaProjectPage projectsPage;
     String url = "https://www.domestika.org/es";
     String message = "";
     String nombreCurso;
@@ -147,6 +152,49 @@ public class DomestikaSteps {
         homePage.loginErrorCredentials();
     }
 
+    @When("me posiciono en los tres puntos")
+    public void me_posiciono_en_los_tres_puntos() {
+        homePage.moveToIconDots();
+    }
 
+    @When("selecciono {string}")
+    public void selecciono(String string) {
+        homePage.clickHelp();
+        supportPage = new DomestikaSupportPage(AppHook.getDriver(),AppHook.getWait());
+    }
+
+    @When("ingreso {string} en la barra de busqueda")
+    public void ingreso_en_la_barra_de_busqueda(String string) {
+        supportPage.setSearchText(string);
+    }
+
+    @When("presiono enter")
+    public void presiono_enter() {
+        supportPage.pressEnterSearchBox(Keys.ENTER);
+    }
+
+
+    @Then("el navegador muestra las respuestas asociadas a la consulta")
+    public void elNavegadorMuestraLasRespuestasAsociadasALaConsulta() {
+        Assert.assertTrue(supportPage.getUrl().contains("search"));
+        Assert.assertTrue(supportPage.getUrl().contains("query"));
+    }
+
+    @When("selecciono la seccion proyectos")
+    public void selecciono_la_seccion_proyectos() {
+        homePage.goToProjects();
+        projectsPage = new DomestikaProjectPage(AppHook.getDriver(),AppHook.getWait());
+
+    }
+
+    @When("selecciono boton recientes")
+    public void selecciono_boton_recientes() {
+        projectsPage.filterProjects("Recientes");
+    }
+
+    @Then("el navegador me muestra los resultados de busqueda de proyectos mas recientes")
+    public void el_navegador_me_muestra_los_resultados_de_busqueda_de_proyectos_mas_recientes() {
+        Assert.assertTrue(projectsPage.getUrl().contains("projects/recent"));
+    }
 
 }

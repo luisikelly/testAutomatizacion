@@ -19,7 +19,6 @@ public class DomestikaHomePage extends SeleniumBase {
     By btnCourses = By.xpath("//a[@id='courses-nav-dropdown']");
     By lateral = By.xpath("//*[@data-track-category='Cursos']");
     By btnGiftCard = By.xpath("//button[@data-track-category='Landing Gift Card']");
-    By tituloGiftCrad = By.xpath("//h3[contains(text(),'Tarjeta regalo de Domestika')]");
     By tituloBusqueda = By.xpath("//h1[contains(text(),"+ categoria +")]");
     By campoBusqueda = By.xpath("//*[@placeholder='Buscar cursos']");
     By btnBuscar = By.xpath("//*[@class='ais-SearchBox-submit']");
@@ -38,9 +37,9 @@ public class DomestikaHomePage extends SeleniumBase {
     By btnGoToLogin = By.xpath("//a[@class='login']");
     By credentialBox = By.xpath("//*[@class='credentials-box']");
     By alertErrorCredential = By.xpath("//div[contains(@class,'alert')]");
-    By languageButton = By.id("languageSelectionDropdownBtn");
-    By dropdownMenuLanguage = By.xpath("//div[contains(@class,'dropdown-menu show')]");
-    By btnClosePopUp = By.xpath("//button[@class='close']");
+    By help = By.xpath("//a[@data-track-action='click - help']");
+    By iconDots = By.xpath("//*[contains(@class,'dots__icon')]");
+    By projects = By.xpath("//*[@data-track-action='click - projects']");
 
 
     public void search(){
@@ -134,44 +133,20 @@ public class DomestikaHomePage extends SeleniumBase {
         Assert.assertEquals("El email o la contraseña no son correctos.",message.getText());
     }
 
-    public void clickLanguage() {
-        WebElement language = findElement(languageButton);
-        language.click();
-        waitForElementAndClick(btnClosePopUp);
-        language.click();
-        waitElementVisible(dropdownMenuLanguage);
-    }
 
-    public void changeLanguage(String newLanguage) {
-        List<WebElement> dropdownLanguage = findElement(dropdownMenuLanguage).findElements(By.tagName("a"));
-        for (WebElement l:dropdownLanguage) {
-            if(l.getText().equals(newLanguage)){
-                l.click();
-            }
-        }
-        waitUrlContains(getUrlLanguage(newLanguage));
-
+    public void moveToIconDots() {
+        WebElement dots = findElement(iconDots);
+        moveToElement(dots);
     }
 
 
-    public String getUrlLanguage(String newLanguage){
-        String language ="";
-        switch (newLanguage){
-            case "Español": language = "es";
-                break;
-            case "English": language = "en";
-                break;
-            case "Português": language = "pt";
-                break;
-            case "Deutsch": language = "de";
-                break;
-            case "Français": language = "fr";
-                break;
-            case "Italiano": language = "it";
-                break;
-
-        }
-        return language;
+    public void clickHelp() {
+        click(help);
+        waitUrlContains("support");
     }
 
+    public void goToProjects() {
+        click(projects);
+        waitUrlContains("projects");
+    }
 }
