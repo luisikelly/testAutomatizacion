@@ -170,4 +170,5 @@ public class DafitiSteps {
         loginPage.validateMessageError(string,string2);
     }
 
+
 }
