@@ -19,7 +19,6 @@ public class DomestikaHomePage extends SeleniumBase {
     By btnCourses = By.xpath("//a[@id='courses-nav-dropdown']");
     By lateral = By.xpath("//*[@data-track-category='Cursos']");
     By btnGiftCard = By.xpath("//button[@data-track-category='Landing Gift Card']");
-    By tituloGiftCrad = By.xpath("//h3[contains(text(),'Tarjeta regalo de Domestika')]");
     By tituloBusqueda = By.xpath("//h1[contains(text(),"+ categoria +")]");
     By campoBusqueda = By.xpath("//*[@placeholder='Buscar cursos']");
     By btnBuscar = By.xpath("//*[@class='ais-SearchBox-submit']");
@@ -32,6 +31,16 @@ public class DomestikaHomePage extends SeleniumBase {
     By addToCart = By.xpath("//button[contains(@id,'add-to-cart')]");
     By btnBuy = By.xpath("//*[@class='a-button js-amplitude-track']");
     By domestikaLogo = By.xpath("//a[contains(text(),'DOMESTIKA')]");
+    By emailBox = By.id("user_email");
+    By passwordBox = By.id("user_password");
+    By btnLogin = By.xpath("//*[@class='a-button ']");
+    By btnGoToLogin = By.xpath("//a[@class='login']");
+    By credentialBox = By.xpath("//*[@class='credentials-box']");
+    By alertErrorCredential = By.xpath("//div[contains(@class,'alert')]");
+    By help = By.xpath("//a[@data-track-action='click - help']");
+    By iconDots = By.xpath("//*[contains(@class,'dots__icon')]");
+    By projects = By.xpath("//*[@data-track-action='click - projects']");
+
 
     public void search(){
         WebElement search = findElement(btnBuscar);
@@ -97,5 +106,47 @@ public class DomestikaHomePage extends SeleniumBase {
         buttons.get(i).click();
         waitUrlContains("/cart");
         findElement(domestikaLogo).click();
+    }
+    public void clickLogin() {
+        WebElement login = findElement(btnGoToLogin);
+        login.click();
+        waitElementVisible(credentialBox);
+    }
+
+    public void setTextLogin(String string, String type) {
+        switch (type){
+            case "email": setText(emailBox,string);
+                break;
+            case "password": setText(passwordBox,string);
+                break;
+        }
+    }
+
+    public void login() {
+        WebElement login = findElement(btnLogin);
+        login.click();
+    }
+
+
+    public void loginErrorCredentials() {
+        WebElement message = findElement(alertErrorCredential).findElement(By.tagName("b"));
+        Assert.assertEquals("El email o la contraseña no son correctos.",message.getText());
+    }
+
+
+    public void moveToIconDots() {
+        WebElement dots = findElement(iconDots);
+        moveToElement(dots);
+    }
+
+
+    public void clickHelp() {
+        click(help);
+        waitUrlContains("support");
+    }
+
+    public void goToProjects() {
+        click(projects);
+        waitUrlContains("projects");
     }
 }

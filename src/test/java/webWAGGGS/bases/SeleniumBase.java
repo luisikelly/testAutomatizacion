@@ -1,4 +1,4 @@
-package webDomestika.bases;
+package webWAGGGS.bases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -91,9 +91,4 @@ public class SeleniumBase {
         Actions action = new Actions(driver);
         action.clickAndHold(we).build().perform();
     }
-
-    public void setKeys(Keys key, By locator){
-        driver.findElement(locator).sendKeys(key);
-    }
-
 }
