@@ -1,15 +1,14 @@
 package automationcraft.testcreation.webDomestika.pages;
 
+import automationcraft.engine.selenium.SeleniumBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import automationcraft.testcreation.webDomestika.bases.SeleniumBase;
 
 public class DomestikaSupportPage extends SeleniumBase {
-    public DomestikaSupportPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public DomestikaSupportPage(WebDriver driver) {
+        super(driver);
     }
 
     By searchBox =  By.id("query");

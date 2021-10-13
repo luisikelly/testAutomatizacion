@@ -1,16 +1,15 @@
 package automationcraft.testcreation.webDomestika.pages;
 
+import automationcraft.engine.selenium.SeleniumBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import automationcraft.testcreation.webDomestika.bases.SeleniumBase;
 
 import java.util.List;
 
 public class DomestikaProjectPage extends SeleniumBase {
-    public DomestikaProjectPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public DomestikaProjectPage(WebDriver driver) {
+        super(driver);
     }
 
     By filters = By.xpath("//ul[@class='nav nav-pills'][1]");

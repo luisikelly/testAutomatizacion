@@ -1,16 +1,14 @@
 package automationcraft.testcreation.webWAGGGS.pages;
 
+import automationcraft.engine.selenium.SeleniumBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import automationcraft.testcreation.webWAGGGS.bases.SeleniumBase;
-
 import java.util.List;
 
 public class WAGGGSGuiasArgentinasPage extends SeleniumBase {
-    public WAGGGSGuiasArgentinasPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public WAGGGSGuiasArgentinasPage(WebDriver driver) {
+        super(driver);
     }
 
     

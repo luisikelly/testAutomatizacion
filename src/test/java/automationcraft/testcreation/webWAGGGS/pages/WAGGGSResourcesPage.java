@@ -1,15 +1,15 @@
 package automationcraft.testcreation.webWAGGGS.pages;
 
+import automationcraft.engine.selenium.SeleniumBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import automationcraft.testcreation.webWAGGGS.bases.SeleniumBase;
 
 public class WAGGGSResourcesPage extends SeleniumBase {
 
-    public WAGGGSResourcesPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public WAGGGSResourcesPage(WebDriver driver) {
+        super(driver);
     }
 
     String resource = "";

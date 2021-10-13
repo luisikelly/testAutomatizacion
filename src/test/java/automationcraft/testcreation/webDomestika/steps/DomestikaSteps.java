@@ -1,8 +1,8 @@
 package automationcraft.testcreation.webDomestika.steps;
 
+import automationcraft.engine.selenium.DriverFactory;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.Keys;
-import automationcraft.testcreation.webDomestika.bases.AppHook;
 import automationcraft.testcreation.webDomestika.pages.DomestikaHomePage;
 import org.junit.Assert;
 import automationcraft.testcreation.webDomestika.pages.DomestikaProjectPage;
@@ -19,7 +19,7 @@ public class DomestikaSteps {
     // ---------- GIVEN -------------------
     @Given("estoy en un navegador con la pagina inicial de Domestika")
     public void estoy_en_un_navegador_con_la_pagina_inicial_de_domestika() {
-        homePage = new DomestikaHomePage(AppHook.getDriver(),AppHook.getWait());
+        homePage = new DomestikaHomePage(DriverFactory.getDriver());
         homePage.goToUrl(url);
         Assert.assertEquals(url, homePage.getUrl());
     }
@@ -160,7 +160,7 @@ public class DomestikaSteps {
     @When("selecciono {string}")
     public void selecciono(String string) {
         homePage.clickHelp();
-        supportPage = new DomestikaSupportPage(AppHook.getDriver(),AppHook.getWait());
+        supportPage = new DomestikaSupportPage(DriverFactory.getDriver());
     }
 
     @When("ingreso {string} en la barra de busqueda")
@@ -183,7 +183,7 @@ public class DomestikaSteps {
     @When("selecciono la seccion proyectos")
     public void selecciono_la_seccion_proyectos() {
         homePage.goToProjects();
-        projectsPage = new DomestikaProjectPage(AppHook.getDriver(),AppHook.getWait());
+        projectsPage = new DomestikaProjectPage(DriverFactory.getDriver());
 
     }
 

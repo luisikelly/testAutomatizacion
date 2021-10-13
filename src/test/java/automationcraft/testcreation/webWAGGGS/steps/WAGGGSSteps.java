@@ -1,8 +1,8 @@
 package automationcraft.testcreation.webWAGGGS.steps;
 
+import automationcraft.engine.selenium.DriverFactory;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-import automationcraft.testcreation.webWAGGGS.bases.AppHook;
 import automationcraft.testcreation.webWAGGGS.pages.WAGGGSGuiasArgentinasPage;
 import automationcraft.testcreation.webWAGGGS.pages.WAGGGSHomePage;
 import automationcraft.testcreation.webWAGGGS.pages.WAGGGSNewsPage;
@@ -21,7 +21,7 @@ public class WAGGGSSteps {
 
     @Given("estoy en un navegador con la pagina inicial de WAGGGS")
     public void estoy_en_un_navegador_con_la_pagina_inicial_de_wagggs() {
-        homePage= new WAGGGSHomePage(AppHook.getDriver(),AppHook.getWait());
+        homePage= new WAGGGSHomePage(DriverFactory.getDriver());
         homePage.goToUrl(url);
         Assert.assertTrue(homePage.getUrl().contains("www.wagggs.org"));
     }
@@ -44,7 +44,7 @@ public class WAGGGSSteps {
     @When("presiono recursos")
     public void presiono_recursos() {
         homePage.goToPage("RECURSOS");
-        resourcesPage = new WAGGGSResourcesPage(AppHook.getDriver(),AppHook.getWait());
+        resourcesPage = new WAGGGSResourcesPage(DriverFactory.getDriver());
         Assert.assertTrue(resourcesPage.getUrl().contains("resources"));
     }
 
@@ -87,7 +87,7 @@ public class WAGGGSSteps {
     @When("presiono noticias")
     public void presiono_noticias() {
         homePage.goToNews();
-        newsPage = new WAGGGSNewsPage(AppHook.getDriver(),AppHook.getWait());
+        newsPage = new WAGGGSNewsPage(DriverFactory.getDriver());
         Assert.assertTrue(newsPage.getUrl().contains("news"));
     }
 
@@ -118,7 +118,7 @@ public class WAGGGSSteps {
 
     @Given("estoy en un navegador con la seccion de la AGA en WAGGGGS")
     public void estoy_en_un_navegador_con_la_seccion_de_la_aga_en_waggggs() {
-        agaPage = new WAGGGSGuiasArgentinasPage(AppHook.getDriver(),AppHook.getWait());
+        agaPage = new WAGGGSGuiasArgentinasPage(DriverFactory.getDriver());
         agaPage.goToUrl(urlAGA);
     }
 

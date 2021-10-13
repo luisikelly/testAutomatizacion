@@ -6,11 +6,14 @@ import com.mongodb.ConnectionString;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.BsonDocument;
 import org.bson.Document;
 import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mongodb.client.model.Aggregates.limit;
 
 public class MongoDBManage {
     public MongoDBManage(String databaseName){
@@ -52,14 +55,7 @@ public class MongoDBManage {
         collection.find(queryFilter).into(documents);
         return documents ;
     }
-    public List<Document> getDocuments(String collectionName){
-        MongoClient client = MongoDBConfig.mongoClient(connectionString);
-        MongoDatabase database = MongoDBConfig.mongoDatabase(client,databaseName);
-        MongoCollection<Document> collection = database.getCollection(collectionName);
-        List<Document> documents = new ArrayList<>();
-        collection.find().into(documents);
-        return documents;
-    }
+
     public void update(Document query,Document change, String collectionName){
         MongoClient client = MongoDBConfig.mongoClient(connectionString);
         MongoDatabase database = MongoDBConfig.mongoDatabase(client,databaseName);
@@ -72,6 +68,20 @@ public class MongoDBManage {
         MongoCollection<Document> collection = database.getCollection(collectionName);
         collection.deleteOne(query);
         Assert.assertNull(collection.find(query));
+    }
+
+    public void deleteDocuments(Document query, String collectionName){
+        MongoClient client = MongoDBConfig.mongoClient(connectionString);
+        MongoDatabase database = MongoDBConfig.mongoDatabase(client,databaseName);
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        collection.deleteMany(query);
+    }
+
+    public Document getLastDocument(String collectionName){
+        MongoClient client = MongoDBConfig.mongoClient(connectionString);
+        MongoDatabase database = MongoDBConfig.mongoDatabase(client,databaseName);
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        return  collection.find().sort(new Document("_id", -1)).first();
     }
 
 }
