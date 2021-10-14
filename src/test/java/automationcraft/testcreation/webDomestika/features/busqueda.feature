@@ -3,7 +3,7 @@ Feature: Busqueda de cursos en Domestika
     Quiero buscar cursos en el sitio de Domestika
     Para realizar una compra.
 
-  @test @busqueda
+  @test @busqueda @category
   Scenario: Busqueda por categoria
     Given estoy en un navegador con la pagina inicial de Domestika
     When selecciono la seccion cursos
@@ -17,7 +17,7 @@ Feature: Busqueda de cursos en Domestika
    #  And realizo la busqueda presionando buscar
      Then el navegador me muestra los cursos que coincidan con la busqueda
 
-  @test @busqueda @support
+  #@test @busqueda @support
   Scenario: Busqueda en seccion soporte
     Given estoy en un navegador con la pagina inicial de Domestika
     When me posiciono en los tres puntos

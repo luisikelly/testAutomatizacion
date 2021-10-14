@@ -17,7 +17,7 @@ public class DomestikaHomePage extends SeleniumBase {
     final static String categoria ="Cursos online de Diseño Web y App";
 
     By btnCourses = By.xpath("//a[@id='courses-nav-dropdown']");
-    By lateral = By.xpath("//*[@data-track-category='Cursos']");
+    By lateral = By.xpath("//a[@data-track-category='Cursos']");
     By btnGiftCard = By.xpath("//button[@data-track-category='Landing Gift Card']");
     By tituloBusqueda = By.xpath("//h1[contains(text(),"+ categoria +")]");
     By campoBusqueda = By.xpath("//*[@placeholder='Buscar cursos']");
