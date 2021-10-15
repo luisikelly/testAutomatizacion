@@ -5,13 +5,13 @@ import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
-        features = {"src/test/java/automationcraft/testcreation/packageName/features"},
-        glue = {"automationcraft.testcreation.packageName.steps","automationcraft.engine.bdd"},
+        features = {"src/test/java/automationcraft/testcreation/webFarmaonline/features"},
+        glue = {"automationcraft.testcreation.webFarmaonline.steps","automationcraft.engine.bdd"},
         plugin = {"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "timeline:test-output-thread"},
-        tags = "@tagName"
+        tags = "@test"
 )
-public class NameRunner extends AbstractTestNGCucumberTests {
+public class FarmaonlineRunner extends AbstractTestNGCucumberTests {
 
     @Override
     @DataProvider
