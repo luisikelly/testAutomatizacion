@@ -6,7 +6,9 @@ Para realizar una compra.
   @test @addToCart
   Scenario: Agregar producto al carrito de compras
   Given estoy en un navegador con la pagina inicial de Farmaonline
-  When presiono el boton agregar del producto de la posicion 1
+  When presiono el boton "Solares"
+  And presiono boton Ver Todos
+  And presiono el boton agregar del producto de la posicion 1
   Then se añade al carrito de compra el producto
 
   @test @removeToCart

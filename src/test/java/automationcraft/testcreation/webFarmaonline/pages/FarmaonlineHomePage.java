@@ -1,14 +1,21 @@
 package automationcraft.testcreation.webFarmaonline.pages;
 
 import automationcraft.engine.selenium.SeleniumBase;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class FarmaonlineHomePage extends SeleniumBase {
     public FarmaonlineHomePage(WebDriver driver) {
         super(driver);
     }
 
+
+        private String searchText;
     /**
      * Locators
      */
@@ -23,7 +30,7 @@ public class FarmaonlineHomePage extends SeleniumBase {
     By cartBox = By.xpath("//div[contains(@class,'js--minicart')]");
     By count = By.xpath("//*[contains(@class,'minicartHeader__amount')]");
     By btnRemove = By.xpath("//*[@class='minicart__item-remove']");
-
+    By btnAdded = By.xpath("//div[contains(@class,'btnAddToCart added')]");
 
     /**
      * Keyword driven
@@ -35,21 +42,39 @@ public class FarmaonlineHomePage extends SeleniumBase {
      * @param string
      */
     public void setTextSearch(String string) {
+        setText(searchBox,string);
+        Assert.assertEquals(string,getAttributeValue(searchBox));
+        searchText = string;
     }
 
     public void search() {
+        setKeys(Keys.ENTER,searchBox);
+        waitUrlContains(searchText.toLowerCase());
     }
 
     public void addToCart(int pos) {
+        List<WebElement> btnProducts = findElements(btnAdd);
+        btnProducts.get(pos).click();
+        waitElementVisible(btnAdded);
     }
 
     public void goToShoppingCart() {
+        click(cart);
+        waitElementVisible(cartBox);
     }
 
     public void removeFromShoppingCart() {
+        click(btnRemove);
     }
 
     public void selectCategory(String string) {
+        List<WebElement> categories = findElement(menuCategories).findElements(By.tagName("a"));
+        for (WebElement c:categories) {
+            if(c.getText().equals(string)){
+                c.click();
+                break;
+            }
+        }
     }
 
     public void validateAddToCart() {
@@ -58,6 +83,24 @@ public class FarmaonlineHomePage extends SeleniumBase {
     public void validateRemove() {
     }
 
-    public void moveTo(String string) {
+    public void moveToCategory() {
+        WebElement cat = findElement(categories);
+        moveToElement(cat);
+    }
+
+    public void goToSection(String string) {
+        List<WebElement> menuBtns = findElements(menu);
+        for (WebElement btn:menuBtns) {
+            if(btn.getText().equals(string)){
+                btn.click();
+                break;
+            }
+        }
+        waitUrlContains(string.toLowerCase());
+    }
+
+    public void clickVerTodos() {
+        click(btnAll);
+        waitUrlContains("busca?fq");
     }
 }

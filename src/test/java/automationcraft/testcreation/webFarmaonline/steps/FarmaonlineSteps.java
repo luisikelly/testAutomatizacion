@@ -54,7 +54,7 @@ public class FarmaonlineSteps {
     }
     @When("me posiciono en {string}")
     public void me_posiciono_en(String string) {
-        homePage.moveTo(string);
+        homePage.moveToCategory();
     }
 
 
@@ -62,7 +62,7 @@ public class FarmaonlineSteps {
 
     @Then("el navegador me muestra los resultados de busqueda de {string}")
     public void el_navegador_me_muestra_los_resultados_de_busqueda_de(String string) {
-        Assert.assertTrue(homePage.getUrl().contains(string));
+        Assert.assertTrue(homePage.getUrl().contains(string.toLowerCase()));
     }
 
     @Then("se añade al carrito de compra el producto")
@@ -81,4 +81,13 @@ public class FarmaonlineSteps {
     }
 
 
+    @When("presiono boton Ver Todos")
+    public void presionoBotonVerTodos() {
+        homePage.clickVerTodos();
+    }
+
+    @When("presiono el boton {string}")
+    public void presionoElBoton(String string) {
+        homePage.goToSection(string);
+    }
 }

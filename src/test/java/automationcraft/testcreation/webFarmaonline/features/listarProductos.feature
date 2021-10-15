@@ -3,7 +3,7 @@ Feature: Listar productos en Farmaonline
   Quiero listar productos por categoria,
   Para poder encontrar el producto que necesito.
 
-
+@test @category
   Scenario: Listar por categoria
     Given estoy en un navegador con la pagina inicial de Farmaonline
     When me posiciono en "CATEGORÍAS"
