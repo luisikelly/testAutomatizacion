@@ -2,11 +2,13 @@ package automationcraft.testcreation.webFarmaonline.steps;
 
 import automationcraft.engine.selenium.DriverFactory;
 import automationcraft.testcreation.webFarmaonline.pages.FarmaonlineHomePage;
+import automationcraft.testcreation.webFarmaonline.pages.FarmaonlinePuntosRetiroPage;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 
 public class FarmaonlineSteps {
     FarmaonlineHomePage homePage;
+    FarmaonlinePuntosRetiroPage retirosPage;
     private final String url = "https://www.farmaonline.com/";
 
     // GIVEN
@@ -106,5 +108,26 @@ public class FarmaonlineSteps {
     @Then("el navegador muestra indica direccion invalida")
     public void elNavegadorMuestraIndicaDireccionInvalida() {
         Assert.assertTrue(homePage.emailInvalid());
+    }
+
+    @When("presionar botón puntos de retiro")
+    public void presionarBotónPuntosDeRetiro() {
+        homePage.clickWithdrawalPoint();
+        retirosPage = new FarmaonlinePuntosRetiroPage(DriverFactory.getDriver());
+    }
+
+    @And("ingreso {string} en el campo de busqueda.")
+    public void ingresoEnElCampoDeBusqueda(String arg0) {
+        retirosPage.setTextSearch(arg0);
+    }
+
+    @And("presiono la tecla enter para buscar puntos de retiro")
+    public void presionoLaTeclaEnterParaBuscarPuntosDeRetiro() {
+        retirosPage.search();
+    }
+
+    @Then("el navegador me muestra los resultados de busqueda de puntos de retiro")
+    public void elNavegadorMeMuestraLosResultadosDeBusquedaDePuntosDeRetiro() {
+        Assert.assertTrue(retirosPage.validateSearch());
     }
 }

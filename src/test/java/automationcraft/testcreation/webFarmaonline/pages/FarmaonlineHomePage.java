@@ -38,6 +38,7 @@ public class FarmaonlineHomePage extends SeleniumBase {
     By submitNewsletter = By.xpath("//button[@id='btn-submit']");
     By popupNewsletter = By.xpath("//div[@id='newsletterPopup']");
     By fieldsetNewsletterInvalid = By.xpath("//fieldset[@class='invalid']");
+    By withdrawalPoint = By.xpath("//a[contains(text(),'Puntos de Retiro')]");
 
     /**
      * Keyword driven
@@ -137,5 +138,10 @@ public class FarmaonlineHomePage extends SeleniumBase {
         }else{
             return false;
         }
+    }
+
+    public void clickWithdrawalPoint() {
+        click(withdrawalPoint);
+        waitUrlContains("puntos-de-retiro");
     }
 }
