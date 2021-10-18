@@ -1,7 +1,6 @@
 package automationcraft.engine.database;
 
-import automationcraft.engine.database.models.CountryData;
-import automationcraft.engine.database.models.SearchData;
+
 import com.mongodb.ConnectionString;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
