@@ -66,7 +66,7 @@ public class FarmaonlineSteps {
     }
 
     @Then("se añade al carrito de compra el producto")
-    public void seAñadeAlCarritoDeCompraElProducto() {
+    public void seAnadeAlCarritoDeCompraElProducto() {
         homePage.validateAddToCart();
     }
 

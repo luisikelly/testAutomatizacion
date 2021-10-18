@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
         glue = {"automationcraft.testcreation.webFarmaonline.steps","automationcraft.engine.bdd"},
         plugin = {"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "timeline:test-output-thread"},
-        tags = "@test"
+        tags = "@remove"
 )
 public class FarmaonlineRunner extends AbstractTestNGCucumberTests {
 

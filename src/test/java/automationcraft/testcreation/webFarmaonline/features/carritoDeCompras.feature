@@ -11,7 +11,7 @@ Para realizar una compra.
   And presiono el boton agregar del producto de la posicion 1
   Then se añade al carrito de compra el producto
 
-  @test @removeToCart @shoppingCart
+  @test @removeFromCart @shoppingCart
   Scenario: Quitar producto del carrito de compras
     Given estoy en un navegador con la pagina inicial de Farmaonline
     And agrego producto al carrito
