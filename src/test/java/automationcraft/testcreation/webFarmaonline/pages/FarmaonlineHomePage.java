@@ -24,7 +24,7 @@ public class FarmaonlineHomePage extends SeleniumBase {
     By cart = By.xpath("//div[@class='wrapperMinicart']");
     By categories = By.xpath("//div[@class='categorias']");
     By menuCategories = By.xpath("//nav[@id='menu']");
-    By menu = By.xpath("//div[@class='col-left'][2]");
+    By locMenu = By.xpath("//div[@class='col-left']/a");
     By btnAdd = By.xpath("//div[contains(@class,'btnAddToCart')]");
     By btnAll = By.xpath("//a[contains(text(),'Ver Todos')][1]");
     By cartBox = By.xpath("//div[contains(@class,'js--minicart')]");
@@ -89,9 +89,10 @@ public class FarmaonlineHomePage extends SeleniumBase {
     }
 
     public void goToSection(String string) {
-        List<WebElement> menuBtns = findElements(menu);
-        for (WebElement btn:menuBtns) {
-            if(btn.getText().equals(string)){
+        List<WebElement> menu = findElements(locMenu);;
+        for (WebElement btn:menu) {
+            System.out.println(btn.getText());
+            if(btn.getText().equals(string.toUpperCase())){
                 btn.click();
                 break;
             }
