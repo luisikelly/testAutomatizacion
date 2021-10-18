@@ -93,5 +93,18 @@ public class FarmaonlineSteps {
     }
 
 
+    @When("ingreso {string} en el campo email")
+    public void ingresoEnElCampoEmail(String arg0) {
+        homePage.setEmailNewsletter(arg0);
+    }
 
+    @When("presiono boton ok para confirmar suscripcion")
+    public void presionoBotonOkParaConfirmarSuscripcion() {
+        homePage.confirmSuscription();
+    }
+
+    @Then("el navegador muestra indica direccion invalida")
+    public void elNavegadorMuestraIndicaDireccionInvalida() {
+        Assert.assertTrue(homePage.emailInvalid());
+    }
 }

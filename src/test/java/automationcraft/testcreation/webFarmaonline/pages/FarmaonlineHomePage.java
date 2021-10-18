@@ -34,7 +34,10 @@ public class FarmaonlineHomePage extends SeleniumBase {
     By amountProducts = By.xpath("//span[contains(@class,'minicartHeader__amount')]");
     By itemCart = By.xpath("//div[@class='minicart__item']");
     By closePopupNewsletter = By.xpath("//a[contains(text(),'×')]");
+    By emailNewsletter = By.xpath("//input[@id='emailP']");
+    By submitNewsletter = By.xpath("//button[@id='btn-submit']");
     By popupNewsletter = By.xpath("//div[@id='newsletterPopup']");
+    By fieldsetNewsletterInvalid = By.xpath("//fieldset[@class='invalid']");
 
     /**
      * Keyword driven
@@ -116,5 +119,23 @@ public class FarmaonlineHomePage extends SeleniumBase {
     }
     public void closePopupNewsletter(){
         click(closePopupNewsletter);
+    }
+
+    public void setEmailNewsletter(String arg0) {
+        setText(emailNewsletter,arg0);
+        Assert.assertEquals(arg0,getAttributeValue(emailNewsletter));
+    }
+
+    public void confirmSuscription() {
+        click(submitNewsletter);
+        waitInvisibilityOf(popupNewsletter);
+    }
+
+    public boolean emailInvalid() {
+        if(findElement(fieldsetNewsletterInvalid) != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
