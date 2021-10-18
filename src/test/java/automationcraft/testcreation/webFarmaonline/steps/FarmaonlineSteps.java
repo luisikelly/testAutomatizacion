@@ -19,7 +19,9 @@ public class FarmaonlineSteps {
 
     @Given("agrego producto al carrito")
     public void agregoProductoAlCarrito() {
-        presionoElBotonAgregarDelProducto(0);
+        presionoElBoton("solares");
+        presionoBotonVerTodos();
+        presionoElBotonAgregarDelProducto(1);
     }
 
     // WHEN
@@ -54,32 +56,9 @@ public class FarmaonlineSteps {
     }
     @When("me posiciono en {string}")
     public void me_posiciono_en(String string) {
+        homePage.closePopupNewsletter();
         homePage.moveToCategory();
     }
-
-
-    // THEN
-
-    @Then("el navegador me muestra los resultados de busqueda de {string}")
-    public void el_navegador_me_muestra_los_resultados_de_busqueda_de(String string) {
-        Assert.assertTrue(homePage.getUrl().contains(string.toLowerCase()));
-    }
-
-    @Then("se añade al carrito de compra el producto")
-    public void seAnadeAlCarritoDeCompraElProducto() {
-        homePage.validateAddToCart();
-    }
-
-    @Then("el navegador me muestra el carrito de compras vacio")
-    public void elNavegadorMeMuestraElCarritoDeComprasVacio() {
-        homePage.validateRemove();
-    }
-
-    @Then("el navegador me muestra los productos de la categoria {string}")
-    public void el_navegador_me_muestra_los_productos_de_la_categoria(String string) {
-        Assert.assertTrue(homePage.getUrl().contains("categorias/"+string));
-    }
-
 
     @When("presiono boton Ver Todos")
     public void presionoBotonVerTodos() {
@@ -90,4 +69,29 @@ public class FarmaonlineSteps {
     public void presionoElBoton(String string) {
         homePage.goToSection(string);
     }
+
+    // THEN
+
+    @Then("el navegador me muestra los resultados de busqueda de {string}")
+    public void el_navegador_me_muestra_los_resultados_de_busqueda_de(String string) {
+        Assert.assertTrue(homePage.getUrl().contains(string.toLowerCase()));
+    }
+
+    @Then("se añade al carrito de compra el producto")
+    public void seAnadeAlCarritoDeCompraElProducto() {
+        Assert.assertEquals("1",homePage.getNumberOfProductsInTheCart());
+    }
+
+    @Then("el navegador me muestra el carrito de compras vacio")
+    public void elNavegadorMeMuestraElCarritoDeComprasVacio() {
+        Assert.assertEquals("0",homePage.getNumberOfProductsInTheCart());
+    }
+
+    @Then("el navegador me muestra los productos de la categoria {string}")
+    public void el_navegador_me_muestra_los_productos_de_la_categoria(String string) {
+        Assert.assertTrue(homePage.getUrl().contains(string));
+    }
+
+
+
 }

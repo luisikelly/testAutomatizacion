@@ -136,7 +136,6 @@ public class SeleniumBase {
     }
     public void waitElementVisible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-
     }
     public void setKeys(Keys key, By locator){
         driver.findElement(locator).sendKeys(key);
@@ -151,4 +150,7 @@ public class SeleniumBase {
         driver.findElement(localizador).sendKeys(s);
     }
 
+    public void waitInvisibilityOf(By location){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(location));
+    }
 }
