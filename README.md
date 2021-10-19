@@ -1,7 +1,7 @@
 # Test Automatización
 
 ### Descripción:
-Práctica Evaluacion TSOFT - Casos de prueba con Selenium utilizando como ejemplo distintas páginas web, utilizando framework de automatizacion
+Práctica Evaluacion TSOFT - Casos de prueba con Selenium utilizando como ejemplo la web de Domestika, Dafiti y WAGGGS, utilizando framework de automatizacion
 
 ### Instrucciones de ejecución:
 
@@ -14,9 +14,4 @@ Práctica Evaluacion TSOFT - Casos de prueba con Selenium utilizando como ejempl
 #### Para el caso de WAGGGS:
 - en Terminal: utilizar comando mvn -Dtest=WAGGGSRunner test
 
-#### Para el caso de GPS Farma:
-- en Terminal: utilizar comando mvn -Dtest=GPSFarmaRunner test
-
-#### Para el caso de Farmaonline:
-- en Terminal: utilizar comando mvn -Dtest=FarmaonlineRunner test
 
